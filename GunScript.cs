@@ -16,7 +16,8 @@ public class GunScript : MonoBehaviour
 	public int bullets = 21;
 	int totalbullets;
 	public GameObject reloadPanel;
-    	public TextMeshProUGUI bulletCounter;
+    public TextMeshProUGUI bulletCounter;
+	public AudioSource gunshotsound;
 
 	public GameObject enemyproj;
     //public CameraShake cameraShake;
@@ -32,16 +33,16 @@ public class GunScript : MonoBehaviour
     {
 		if (Input.GetButtonDown("Fire1") && bullets > 0)
 		{
-				//StartCoroutine("Fire");
-				shootFunc();
-				//muzzleFlash.Play();
-				bullets--;
-				
-		}
+			gunshotsound.Play();		
+			shootFunc();
+			muzzleFlash.Play();
+			bullets--;
+            //StartCoroutine("Fire");
+        }
 
-		else if(Input.GetButtonDown("Fire1") && bullets <= 0) 
+        else if(Input.GetButtonDown("Fire1") && bullets <= 0) 
 		{
-				StartCoroutine("reloading");
+			StartCoroutine("reloading");
 		}
 
 		bulletCounter.text = "Bullets: " + bullets;
