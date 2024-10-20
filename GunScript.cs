@@ -20,7 +20,6 @@ public class GunScript : MonoBehaviour
 	public AudioSource gunshotsound;
 
 	public GameObject enemyproj;
-    //public CameraShake cameraShake;
 
     private void Start()
     {
@@ -28,7 +27,6 @@ public class GunScript : MonoBehaviour
 		totalbullets = bullets;
     }
 
-    // Update is called once per frame
     void Update()
     {
 		if (Input.GetButtonDown("Fire1") && bullets > 0)
@@ -37,7 +35,6 @@ public class GunScript : MonoBehaviour
 			shootFunc();
 			muzzleFlash.Play();
 			bullets--;
-            //StartCoroutine("Fire");
         }
 
         else if(Input.GetButtonDown("Fire1") && bullets <= 0) 
@@ -47,26 +44,7 @@ public class GunScript : MonoBehaviour
 
 		bulletCounter.text = "Bullets: " + bullets;
     }
-    
-	//shooting method
-	/*IEnumerator Fire()
-	{
-		RaycastHit hit;
-		Ray ray = new Ray(barrel.position, transform.forward);
-
-		if(Physics.Raycast(ray, out hit, range))
-		{
-			if(hit.collider.tag == "Enemy")
-			{
-				Enemy enemy = hit.collider.GetComponent<Enemy>();
-				enemy.health -= damage;
-			}
-		}
-
-		Debug.DrawRay(barrel.position, transform.forward * range, Color.yellow);
-		yield return null;
-	}*/
-
+   
 	public void shootFunc()
 	{
         RaycastHit hit;
@@ -80,12 +58,6 @@ public class GunScript : MonoBehaviour
                 enemy.health -= damage;
 				Debug.Log("hit");
             }
-
-			if(hit.collider.tag == "EnemyProjectile")
-			{
-				Debug.Log("chain attacked");
-				Destroy(enemyproj);
-			}
         }
 
         Debug.DrawRay(barrel.position, transform.forward * range, Color.yellow);
